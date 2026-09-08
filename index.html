@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YuZu · Cozy Days</title>
+  <meta name="description" content="YuZu 的小小作品收藏页" />
+  <style>
+    :root {
+      --bg: #f6efe4;
+      --paper: #fffaf2;
+      --ink: #2c2925;
+      --muted: #8b7f73;
+      --line: #d8c9b8;
+      --accent: #b44f3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-rounded, "SF Pro Rounded", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.8), transparent 25%),
+        linear-gradient(180deg, #f8f1e7 0%, #f2e8dc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+    }
+    .wrap {
+      width: min(920px, 100%);
+    }
+    .brand {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .brand h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 6vw, 52px);
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+    .brand p {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: .12em;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid rgba(90,70,50,.12);
+      border-radius: 28px;
+      padding: clamp(14px, 3vw, 26px);
+      box-shadow: 0 18px 50px rgba(74, 54, 36, .12);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px dashed rgba(115, 91, 66, .14);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+    .image-wrap {
+      position: relative;
+      z-index: 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #e9dfd1;
+    }
+    .image-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .caption {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 22px 12px 8px;
+    }
+    .caption .title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 4vw, 36px);
+      margin: 0;
+      font-weight: 500;
+    }
+    .caption .sub {
+      margin: 10px auto 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 620px;
+      font-size: 15px;
+    }
+    .tiny {
+      text-align: center;
+      margin-top: 18px;
+      color: #9c8f83;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+    .heart { color: var(--accent); }
+    @media (max-width: 600px) {
+      body { padding: 18px 12px; }
+      .card { border-radius: 22px; padding: 12px; }
+      .card::before { inset: 8px; }
+      .caption { padding-top: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="brand">
+      <h1>YuZu</h1>
+      <p>COZY LITTLE COLLECTION</p>
+    </header>
+
+    <section class="card">
+      <div class="image-wrap">
+        <img src="friends.jpeg" alt="好朋友的温暖插画" />
+      </div>
+      <div class="caption">
+        <h2 class="title">Good Friends Always <span class="heart">♥</span></h2>
+        <p class="sub">不同的性格，也可以拥有一样温暖的陪伴。这里是 YuZu 的小小收藏页，记录喜欢的作品、故事和日常。</p>
+      </div>
+    </section>
+
+    <div class="tiny">Made with care · YuZu</div>
+  </main>
+</body>
+</html>
