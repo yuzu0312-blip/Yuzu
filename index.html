@@ -1,220 +1,133 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4efe7" />
-  <title>YuZu の小さなアトリエ</title>
-  <meta name="description" content="YuZu の小さなアトリエ。好きなもの、手でつくったもの、小さな記憶をゆっくり集める場所。" />
-  <style>
-    :root{
-      --bg:#f4efe7;
-      --paper:#fbf8f2;
-      --paper-2:#f7f1e8;
-      --ink:#332d28;
-      --muted:#8a7d71;
-      --line:#d8cabc;
-      --accent:#9f493d;
-      --shadow:0 22px 60px rgba(76,57,40,.10);
-      --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",Georgia,serif;
-      --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",sans-serif;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 18% 8%,rgba(255,255,255,.75),transparent 30%),
-        linear-gradient(180deg,#f8f4ed 0%,var(--bg) 70%,#efe7dd 100%);
-      font-family:var(--sans);
-      -webkit-font-smoothing:antialiased;
-    }
-    body:before{
-      content:"";
-      position:fixed; inset:0; pointer-events:none; opacity:.18;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
-      mix-blend-mode:multiply;
-    }
-    a{color:inherit;text-decoration:none}
-    .shell{width:min(1120px,calc(100% - 34px));margin:0 auto}
-
-    /* header */
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      min-height:78px;padding-top:env(safe-area-inset-top);
-      border-bottom:1px solid rgba(100,80,62,.12);
-    }
-    .logo{font-family:Georgia,var(--serif);font-size:21px;letter-spacing:.12em}
-    nav{display:flex;gap:24px;font-size:11px;letter-spacing:.14em;color:var(--muted)}
-    nav a{padding:9px 0;position:relative}
-    nav a:after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--accent);transition:.25s}
-    nav a:hover:after{right:0}
-
-    /* hero */
-    .hero{padding:92px 0 86px;display:grid;grid-template-columns:1.25fr .75fr;gap:70px;align-items:end}
-    .eyebrow{font-size:11px;letter-spacing:.28em;color:var(--muted);margin-bottom:18px}
-    h1{font-family:var(--serif);font-weight:500;font-size:clamp(42px,7vw,76px);line-height:1.24;margin:0;letter-spacing:.02em}
-    .slogan{font-family:Georgia,var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,26px);margin:28px 0 8px;color:#554a42}
-    .jp-line{font-family:var(--serif);font-size:16px;letter-spacing:.08em;color:var(--muted)}
-    .hero-note{padding:0 0 6px 28px;border-left:1px solid var(--line);font-family:var(--serif);font-size:14px;line-height:2.2;color:#766a60}
-    .seal{margin-top:23px;width:43px;height:43px;border:1px solid rgba(159,73,61,.55);color:var(--accent);display:grid;place-items:center;font-family:var(--serif);font-size:18px;transform:rotate(-4deg);border-radius:3px}
-
-    /* section common */
-    .section{padding:84px 0}
-    .section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}
-    .section-kicker{font-size:10px;letter-spacing:.24em;color:var(--muted);margin-bottom:9px}
-    h2{margin:0;font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:500}
-    .count{font-family:Georgia,serif;color:#aaa096;font-size:13px;letter-spacing:.12em}
-
-    /* featured collection */
-    .feature{
-      background:rgba(251,248,242,.82);border:1px solid rgba(103,83,67,.12);
-      border-radius:30px;padding:18px;box-shadow:var(--shadow);
-    }
-    .photo{position:relative;overflow:hidden;border-radius:20px;background:#e7ded2;aspect-ratio:1.48/1}
-    .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
-    .feature:hover .photo img{transform:scale(1.015)}
-    .photo-label{position:absolute;left:17px;top:17px;background:rgba(251,248,242,.9);backdrop-filter:blur(7px);padding:9px 11px;border-radius:999px;font-size:9px;letter-spacing:.18em;color:#665c54}
-    .feature-copy{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;padding:25px 10px 11px}
-    .feature-title{font-family:Georgia,var(--serif);font-size:clamp(25px,4vw,38px);margin:0 0 8px;font-weight:500}
-    .feature-jp{font-family:var(--serif);font-size:14px;color:var(--muted);letter-spacing:.08em;margin:0}
-    .arrow{width:45px;height:45px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:19px;color:#7c7065}
-
-    /* atelier note */
-    .note-wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:start}
-    .note-card{background:var(--paper-2);border:1px solid rgba(102,82,64,.11);padding:42px 46px;border-radius:22px;position:relative}
-    .note-card:before{content:"";position:absolute;width:55px;height:1px;background:var(--accent);left:-22px;top:47px}
-    .note-card p{font-family:var(--serif);font-size:clamp(16px,2vw,20px);line-height:2.15;margin:0;color:#5e544b}
-    .small-note{margin-top:19px;font-size:11px;line-height:1.9;color:var(--muted);letter-spacing:.05em}
-
-    /* future shelves */
-    .shelves{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-    .shelf{min-height:190px;border:1px dashed rgba(102,82,64,.23);border-radius:20px;padding:25px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.18)}
-    .shelf span{font-size:9px;letter-spacing:.2em;color:#a09387}
-    .shelf h3{font-family:var(--serif);font-weight:500;font-size:20px;margin:0;color:#6c6259}
-    .shelf p{font-size:11px;line-height:1.8;color:#9a8e83;margin:6px 0 0}
-
-    footer{margin-top:40px;border-top:1px solid rgba(100,80,62,.13);padding:34px 0 48px;display:flex;justify-content:space-between;gap:20px;color:#94887e;font-size:10px;letter-spacing:.12em}
-
-    @media(max-width:760px){
-      .shell{width:min(100% - 24px,1120px)}
-      header{min-height:66px}
-      nav{gap:13px;font-size:9px}
-      .hero{grid-template-columns:1fr;gap:39px;padding:67px 6px 65px}
-      .hero-note{margin-left:2px;padding-left:20px}
-      .section{padding:64px 0}
-      .feature{border-radius:24px;padding:10px}
-      .photo{border-radius:17px}
-      .feature-copy{padding:20px 8px 9px}
-      .arrow{width:39px;height:39px}
-      .note-wrap{grid-template-columns:1fr;gap:24px}
-      .note-card{padding:32px 27px}
-      .note-card:before{display:none}
-      .shelves{grid-template-columns:1fr}
-      .shelf{min-height:145px}
-      footer{flex-direction:column;line-height:1.7}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f1e9">
+<title>YuZu の小さなアトリエ</title>
+<meta name="description" content="YuZu の小さなアトリエ。手から生まれた小さな作品と、大切なコレクションをゆっくり残していく場所。">
+<style>
+:root{
+ --bg:#f5f1e9; --paper:#fbf8f2; --ink:#302b27; --muted:#8d8177;
+ --line:#d9cfc3; --accent:#96564a;
+ --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",Georgia,serif;
+ --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+header{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(80,65,52,.12)}
+.logo{font:20px Georgia,var(--serif);letter-spacing:.13em}
+nav{display:flex;gap:28px;font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.hero{min-height:540px;display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:center;padding:70px 0}
+.kicker{font-size:10px;letter-spacing:.27em;color:var(--muted);margin-bottom:20px}
+h1,h2,h3{font-family:var(--serif);font-weight:500}
+h1{font-size:clamp(45px,7vw,78px);line-height:1.22;margin:0}
+.slogan{font:italic clamp(18px,2.2vw,25px) Georgia,var(--serif);margin:28px 0 8px;color:#574d45}
+.jp{font-family:var(--serif);font-size:16px;letter-spacing:.07em;color:var(--muted)}
+.hero-copy{border-left:1px solid var(--line);padding-left:30px;font-family:var(--serif);font-size:15px;line-height:2.25;color:#74685e}
+.hero-copy b{font-weight:500;color:#514840}
+.section{padding:95px 0}.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:35px}
+h2{font-size:clamp(30px,4vw,46px);margin:0}.en{font-size:10px;letter-spacing:.24em;color:var(--muted);margin-bottom:10px}
+.intro{max-width:610px;font-family:var(--serif);line-height:2.1;color:#6f645a;font-size:14px}
+.feature{margin-top:40px}.feature-photo{width:100%;overflow:hidden;background:#e7dfd5}
+.feature-photo img{display:block;width:100%;height:auto;max-height:720px;object-fit:cover}
+.caption{display:grid;grid-template-columns:1fr auto;gap:30px;padding:25px 3px 0}
+.tag{font-size:10px;letter-spacing:.17em;color:var(--accent);margin-bottom:10px}
+.caption h3{font:500 clamp(27px,4vw,40px) Georgia,var(--serif);margin:0 0 8px}
+.caption p{font-family:var(--serif);color:var(--muted);margin:0;letter-spacing:.06em}
+.mark{font-family:var(--serif);font-size:12px;color:#8f8379;border-bottom:1px solid var(--line);padding-bottom:4px;align-self:end}
+.divider{height:1px;background:rgba(80,65,52,.13)}
+.world{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:start}
+.note{font-family:var(--serif);font-size:clamp(17px,2vw,21px);line-height:2.2;color:#5f554d}
+.note small{display:block;margin-top:20px;font-family:var(--sans);font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.shelves{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.shelf{background:var(--bg);min-height:220px;padding:30px;display:flex;flex-direction:column;justify-content:space-between}
+.shelf span{font-size:9px;letter-spacing:.2em;color:#9d9186}.shelf h3{font-size:22px;margin:0 0 8px}.shelf p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+.status{margin-top:14px;font-family:var(--serif);font-size:12px;color:#766a61}
+footer{border-top:1px solid rgba(80,65,52,.13);padding:38px 0 50px;display:flex;justify-content:space-between;color:#958a80;font-size:10px;letter-spacing:.11em}
+@media(max-width:760px){
+ .wrap{width:calc(100% - 28px)} header{height:66px} nav{gap:14px;font-size:9px}
+ .hero{min-height:auto;grid-template-columns:1fr;gap:42px;padding:72px 4px 76px}
+ .hero-copy{padding-left:20px}.section{padding:70px 0}.head{display:block}
+ .intro{margin-top:22px}.feature{margin-top:30px}.feature-photo{margin-left:-14px;width:calc(100% + 28px)}
+ .caption{grid-template-columns:1fr;padding-top:22px}.mark{justify-self:start}
+ .world{grid-template-columns:1fr;gap:32px}.shelves{grid-template-columns:1fr}
+ .shelf{min-height:160px} footer{flex-direction:column;gap:10px;line-height:1.7}
+}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <header>
-      <a class="logo" href="#top">YuZu</a>
-      <nav aria-label="Main navigation">
-        <a href="#atelier">アトリエ</a>
-        <a href="#collection">コレクション</a>
-        <a href="#note">ノート</a>
-      </nav>
-    </header>
+<div class="wrap">
+<header>
+ <a class="logo" href="#top">YuZu</a>
+ <nav><a href="#atelier">アトリエ</a><a href="#works">作品</a><a href="#collection">コレクション</a></nav>
+</header>
 
-    <main id="top">
-      <section class="hero" id="atelier">
-        <div>
-          <div class="eyebrow">YUZU'S LITTLE ATELIER</div>
-          <h1>YuZu の<br>小さなアトリエ</h1>
-          <p class="slogan">Little things, made with love.</p>
-          <p class="jp-line">小さなものに、たくさんの愛を。</p>
-        </div>
-        <div>
-          <div class="hero-note">
-            好きなもの、手でつくったもの、<br>
-            忘れたくない小さな景色を、<br>
-            ここに少しずつ集めています。
-          </div>
-          <div class="seal" aria-hidden="true">ゆ</div>
-        </div>
-      </section>
+<main id="top">
+<section class="hero" id="atelier">
+ <div>
+  <div class="kicker">YUZU'S LITTLE ATELIER</div>
+  <h1>YuZu の<br>小さなアトリエ</h1>
+  <p class="slogan">Little things, made with love.</p>
+  <p class="jp">小さなものに、たくさんの愛を。</p>
+ </div>
+ <div class="hero-copy">
+  手から生まれた小さな作品と、<br>
+  ずっとそばに置いておきたい大切なもの。<br>
+  <b>ここは、作品とコレクションが一緒に暮らす小さなアトリエです。</b>
+ </div>
+</section>
 
-      <section class="section" id="collection">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">COLLECTION</div>
-            <h2>小さなコレクション</h2>
-          </div>
-          <div class="count">01 / —</div>
-        </div>
+<div class="divider"></div>
 
-        <article class="feature">
-          <div class="photo">
-            <img src="friends.jpeg" alt="Good Friends, Always." loading="eager" />
-            <div class="photo-label">COLLECTION 001</div>
-          </div>
-          <div class="feature-copy">
-            <div>
-              <h3 class="feature-title">Good Friends, Always.</h3>
-              <p class="feature-jp">ずっと、なかよし。</p>
-            </div>
-            <div class="arrow" aria-hidden="true">↗</div>
-          </div>
-        </article>
-      </section>
-
-      <section class="section" id="note">
-        <div class="note-wrap">
-          <div>
-            <div class="section-kicker">ATELIER NOTE</div>
-            <h2>アトリエノート</h2>
-          </div>
-          <div class="note-card">
-            <p>
-              ひとつひとつの小さなものに、<br>
-              そのときの気持ちや記憶があります。<br>
-              ここは、それらをゆっくり残していく場所です。
-            </p>
-            <div class="small-note">A quiet place for handmade things, little friends and memories worth keeping.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" aria-label="Future collections">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">SOMEDAY, LITTLE BY LITTLE</div>
-            <h2>これからの棚</h2>
-          </div>
-        </div>
-        <div class="shelves">
-          <div class="shelf">
-            <span>HANDMADE</span>
-            <div><h3>手しごと</h3><p>つくったものを、少しずつ。</p></div>
-          </div>
-          <div class="shelf">
-            <span>POSTCARDS</span>
-            <div><h3>ポストカード</h3><p>小さな景色と、残しておきたい言葉。</p></div>
-          </div>
-          <div class="shelf">
-            <span>LITTLE FRIENDS</span>
-            <div><h3>小さな友だち</h3><p>大切な子たちの記録。</p></div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>© YuZu の小さなアトリエ</div>
-      <div>小さなものに、たくさんの愛を。</div>
-    </footer>
+<section class="section" id="collection">
+ <div class="head">
+  <div><div class="en">TREASURED COLLECTION</div><h2>大切なコレクション</h2></div>
+  <div class="intro">つくったものだけではなく、出会って、好きになって、そばに置いてきたものも。大切な記憶として、ここに残していきます。</div>
+ </div>
+ <article class="feature">
+  <div class="feature-photo"><img src="friends.jpeg" alt="Good Friends, Always."></div>
+  <div class="caption">
+   <div>
+    <div class="tag">大切なコレクション</div>
+    <h3>Good Friends, Always.</h3>
+    <p>ずっと、なかよし。</p>
+   </div>
+   <div class="mark">MY COLLECTION</div>
   </div>
+ </article>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="works">
+ <div class="world">
+  <div>
+   <div class="en">WORKS & LITTLE FRIENDS</div>
+   <h2>アトリエの作品</h2>
+  </div>
+  <div class="note">
+   ひとつひとつ、手でつくったもの。<br>
+   作品には <b>No.001</b> から、少しずつ番号を重ねていきます。<br>
+   誰かのもとへ旅立ったあとも、その子の記録はここに残ります。
+   <small>HANDMADE BY YUZU · ARCHIVE OF LITTLE TREASURES</small>
+  </div>
+ </div>
+</section>
+
+<section class="section" style="padding-top:0">
+ <div class="shelves">
+  <div class="shelf"><span>HANDMADE WORKS</span><div><h3>手しごと</h3><p>YuZu の手から生まれた作品たち。</p><div class="status">No.001 — これから</div></div></div>
+  <div class="shelf"><span>LITTLE FRIENDS</span><div><h3>小さな友だち</h3><p>それぞれの名前と、小さな物語。</p></div></div>
+  <div class="shelf"><span>POSTCARDS</span><div><h3>ポストカード</h3><p>残しておきたい景色と言葉。</p></div></div>
+  <div class="shelf"><span>ATELIER NOTE</span><div><h3>アトリエノート</h3><p>制作の途中、日々の記憶、そして小さな発見。</p></div></div>
+ </div>
+</section>
+</main>
+
+<footer><div>© YuZu の小さなアトリエ</div><div>小さなものに、たくさんの愛を。</div></footer>
+</div>
 </body>
 </html>
